@@ -12,6 +12,8 @@ router.get('/', (req, res) => {
     ]
   }).then(products => {
     res.json(products)
+  }).catch(err => {
+    res.status(500).json({error: 'There was an error, try again later.'})
   })
 });
 
@@ -21,7 +23,9 @@ router.get('/:id', (req, res) => {
     { model: Category, model: Tag }
   ]}).then(product => {
     res.json(product)
-  })
+  }).catch(err => {
+    res.status(500).json({error: 'There was an error, try again later.'})
+   })
 });
 
 // create new product
@@ -91,7 +95,7 @@ router.put('/:id', (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.json('UPDATES!'))
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);
